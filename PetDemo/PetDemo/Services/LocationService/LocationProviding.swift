@@ -8,5 +8,5 @@
 import Combine
 
 protocol LocationProviding {
-    func getLocation() -> AnyPublisher<(latitude: Double, logitude: Double), Error>
+    func getLocation() -> AnyPublisher<(latitude: Double, longitude: Double), Error>
 }

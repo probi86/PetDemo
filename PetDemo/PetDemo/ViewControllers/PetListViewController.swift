@@ -131,5 +131,10 @@ extension PetListViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let pet = viewModel?.pets[indexPath.row] {
+            viewModel?.selected(pet: pet)
+        }
+    }
     
 }

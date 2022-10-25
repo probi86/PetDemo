@@ -82,9 +82,26 @@
                     <view key="view" contentMode="scaleToFill" id="P7K-Lh-Vkw">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pgT-kv-LDI">
+                                <rect key="frame" x="20" y="48" width="374" height="299"/>
+                                <color key="backgroundColor" systemColor="systemBrownColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" secondItem="pgT-kv-LDI" secondAttribute="width" multiplier="0.8" priority="750" id="hxN-2G-opC"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="ZH8-Re-Uwd"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="pgT-kv-LDI" firstAttribute="top" secondItem="ZH8-Re-Uwd" secondAttribute="top" id="YdO-nr-0Kw"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="pgT-kv-LDI" secondAttribute="trailing" id="cFk-mh-OEz"/>
+                            <constraint firstItem="pgT-kv-LDI" firstAttribute="leading" secondItem="P7K-Lh-Vkw" secondAttribute="leadingMargin" id="uu8-zB-zih"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="petImageView" destination="pgT-kv-LDI" id="lKd-dg-Lld"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1BZ-Ic-ygL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -95,6 +112,9 @@
         <image name="arrow.clockwise" catalog="system" width="113" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBrownColor">
+            <color red="0.63529411764705879" green="0.51764705882352946" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

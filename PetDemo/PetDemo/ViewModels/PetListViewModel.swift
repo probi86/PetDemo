@@ -11,6 +11,7 @@ import Combine
 class PetListViewModel {
     
     //MARK: - IVars
+    private var coordinator: PetListCoordinator
     private var apiServiceProvider: PetAPIServiceProviding
     private var locationProvider: LocationProviding
     
@@ -35,9 +36,11 @@ class PetListViewModel {
     //MARK: - Lifecycle
     
     init(
+        coordinator: PetListCoordinator,
         apiServiceProvider: PetAPIServiceProviding,
         locationProvider: LocationProviding
     ) {
+        self.coordinator = coordinator
         self.apiServiceProvider = apiServiceProvider
         self.locationProvider = locationProvider
         
@@ -56,11 +59,14 @@ class PetListViewModel {
             lastLongitude = 0
             
             locationProvider.getLocation()
-                .sink { [weak self] _ in
-                    self?.reloadPets(withLocation: false)
+                .first()
+                .sink { [weak self] completion in
+                    if case .failure = completion {
+                        self?.reloadPets(withLocation: false)
+                    }
                 } receiveValue: {[weak self] tuple in
                     self?.lastLatitude = tuple.latitude
-                    self?.lastLongitude = tuple.logitude
+                    self?.lastLongitude = tuple.longitude
                     self?.reloadPets(withLocation: false)
                 }
                 .store(in: &cancellables)
@@ -103,10 +109,15 @@ class PetListViewModel {
                 .sink { [weak self] _ in
                     self?.isLoadingNextPage = false
                 } receiveValue: { [weak self] petResponse in
+                    print("Loaded next page")
                     self?.pets.append(contentsOf: petResponse.animals)
                     self?.paginationInfo = petResponse.pagination
                 }
                 .store(in: &cancellables)
         }
+    }
+    
+    func selected(pet: Pet) {
+        coordinator.showDetailFor(pet: pet)
     }
 }

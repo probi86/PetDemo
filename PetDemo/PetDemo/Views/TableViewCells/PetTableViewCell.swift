@@ -17,6 +17,8 @@ class PetTableViewCell: UITableViewCell {
     @IBOutlet weak var petBreedLabel: UILabel!
     @IBOutlet weak var petSubtitleLabel: UILabel!
     
+    @IBOutlet weak var petImageViewWidthConstraint: NSLayoutConstraint!
+    
     var pet: Pet? {
         didSet {
             petNameLabel.text = pet?.name
@@ -26,7 +28,11 @@ class PetTableViewCell: UITableViewCell {
             petBreedLabel.text = pet?.breed
             
             if let smallPhoto = pet?.photos?.first?.large, let url = URL(string: smallPhoto) {
+                petImageViewWidthConstraint.constant = petImageView.frame.size.height
                 petImageView.kf.setImage(with: url, placeholder: petImageView.image, options: .optionsForFadeIn())
+                
+            } else {
+                petImageViewWidthConstraint.constant = 0
             }
         }
     }
@@ -36,6 +42,14 @@ class PetTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         petImageView.layer.cornerRadius = petImageView.frame.size.height / 2.0
+    }
+    
+    //MARK: - Overriden
+    
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        UIView.animate(withDuration: animated ? 0.2 : 0.0) {
+            self.alpha = highlighted ? 0.5 : 1.0
+        }
     }
     
 }

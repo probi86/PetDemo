@@ -12,7 +12,7 @@ class PetDetailViewModel {
     private var apiServiceProvider: PetAPIServiceProviding
     private var locationProvider: LocationProviding
     
-    private var pet: Pet
+    private(set) var pet : Pet
     
     init(
         apiServiceProvider: PetAPIServiceProviding,

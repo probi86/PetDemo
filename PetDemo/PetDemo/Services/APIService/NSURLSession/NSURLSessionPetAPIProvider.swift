@@ -102,7 +102,7 @@ class NSURLSessionPetAPIProvider: PetAPIServiceProviding {
     private func getBearerToken() -> AnyPublisher<Token, Error> {
         //Return the current token if not expired
         if let t = token {
-            if let tokenValidFor = t.expirationDate?.timeIntervalSinceNow, tokenValidFor > 3590 { //TODO: Change this!
+            if let tokenValidFor = t.expirationDate?.timeIntervalSinceNow, tokenValidFor > 3598 { //TODO: Change this!
                 return Just(t)
                     .setFailureType(to: Error.self)
                     .eraseToAnyPublisher()
@@ -122,6 +122,7 @@ class NSURLSessionPetAPIProvider: PetAPIServiceProviding {
                 .eraseToAnyPublisher()
         }
         
+        print("Refreshing token")
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         let str = "grant_type=client_credentials&client_id=\(apiKey)&client_secret=\(apiSecret)"
