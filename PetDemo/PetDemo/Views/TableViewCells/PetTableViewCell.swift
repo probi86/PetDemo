@@ -26,7 +26,7 @@ class PetTableViewCell: UITableViewCell {
             petBreedLabel.text = pet?.breed
             
             if let smallPhoto = pet?.photos?.first?.large, let url = URL(string: smallPhoto) {
-                petImageView.kf.setImage(with: url, options: .optionsForFadeIn())
+                petImageView.kf.setImage(with: url, placeholder: petImageView.image, options: .optionsForFadeIn())
             }
         }
     }

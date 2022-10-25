@@ -39,17 +39,17 @@ class PetListViewController: UIViewController {
         
         setupBindings()
         
-        viewModel?.reloadPets()
+        viewModel?.reloadPets(withLocation: true)
     }
     
     //MARK: - Actions
     
     @objc func tableViewRefreshed() {
-        viewModel?.reloadPets()
+        viewModel?.reloadPets(withLocation: true)
     }
     
     @IBAction func retryTapped(_ sender: Any) {
-        viewModel?.reloadPets()
+        viewModel?.reloadPets(withLocation: true)
     }
     
     //MARK: - Private

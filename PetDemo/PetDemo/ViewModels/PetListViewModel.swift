@@ -20,8 +20,8 @@ class PetListViewModel {
     @Published private(set) var loadingError: Error?
     @Published private(set) var morePagesAvailable = false
      
-    private var lastLatitude: Double?
-    private var lastLongitude: Double?
+    private var lastLatitude: Double = 0
+    private var lastLongitude: Double = 0
     private var paginationInfo: PetPagination? {
         didSet {
             if let info = paginationInfo {
@@ -47,31 +47,42 @@ class PetListViewModel {
     
     //MARK: - Public
     
-    func reloadPets() {
+    func reloadPets(withLocation: Bool = false) {
         isReloading = true
         loadingError = nil
         
-        //TODO: Replace this with location logic
-        lastLatitude = 0
-        lastLongitude = 0
-
-        apiServiceProvider.loatPets(latitude: lastLatitude, longitude: lastLongitude, page: nil)
-            .sink(receiveCompletion: { [weak self] completion in
-                switch completion {
-                case .failure(let error):
-                    self?.loadingError = error
-                default:
-                    break
+        if withLocation {
+            lastLatitude = 0
+            lastLongitude = 0
+            
+            locationProvider.getLocation()
+                .sink { [weak self] _ in
+                    self?.reloadPets(withLocation: false)
+                } receiveValue: {[weak self] tuple in
+                    self?.lastLatitude = tuple.latitude
+                    self?.lastLongitude = tuple.logitude
+                    self?.reloadPets(withLocation: false)
                 }
-                
-                self?.isReloading = false
-                
-            }, receiveValue: { [weak self] petResponse in
-                print("Loaded pets")
-                self?.pets = petResponse.animals
-                self?.paginationInfo = petResponse.pagination
-            })
-            .store(in: &cancellables)
+                .store(in: &cancellables)
+        } else {
+            apiServiceProvider.loatPets(latitude: lastLatitude, longitude: lastLongitude, page: nil)
+                .sink(receiveCompletion: { [weak self] completion in
+                    switch completion {
+                    case .failure(let error):
+                        self?.loadingError = error
+                    default:
+                        break
+                    }
+                    
+                    self?.isReloading = false
+                    
+                }, receiveValue: { [weak self] petResponse in
+                    print("Loaded pets")
+                    self?.pets = petResponse.animals
+                    self?.paginationInfo = petResponse.pagination
+                })
+                .store(in: &cancellables)
+        }
     }
     
     func loadNextPage() {
