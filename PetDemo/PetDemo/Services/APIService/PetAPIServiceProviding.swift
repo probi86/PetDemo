@@ -8,5 +8,5 @@
 import Combine
 
 protocol PetAPIServiceProviding {
-    func reloadPets(latitude: Double?, longitude: Double?, page: Int?) -> AnyPublisher<PetResponse, Error>
+    func loatPets(latitude: Double?, longitude: Double?, page: Int?) -> AnyPublisher<PetResponse, Error>
 }

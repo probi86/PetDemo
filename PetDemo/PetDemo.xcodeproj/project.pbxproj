@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		132720792907F420001AF33A /* Kingfisher+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132720782907F420001AF33A /* Kingfisher+Extensions.swift */; };
 		13E3E2BA2907E2E20085D9A6 /* PetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E3E2B82907E2E20085D9A6 /* PetTableViewCell.swift */; };
 		13E3E2BB2907E2E20085D9A6 /* PetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13E3E2B92907E2E20085D9A6 /* PetTableViewCell.xib */; };
 		13E3E2BE2907E78B0085D9A6 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 13E3E2BD2907E78B0085D9A6 /* Kingfisher */; };
@@ -49,6 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		132720782907F420001AF33A /* Kingfisher+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Kingfisher+Extensions.swift"; sourceTree = "<group>"; };
 		13E3E2B82907E2E20085D9A6 /* PetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetTableViewCell.swift; sourceTree = "<group>"; };
 		13E3E2B92907E2E20085D9A6 /* PetTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PetTableViewCell.xib; sourceTree = "<group>"; };
 		13E6F58A2907D68B0083FB70 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -102,6 +104,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		132720772907F420001AF33A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				132720782907F420001AF33A /* Kingfisher+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		13E3E2B62907E2BA0085D9A6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -168,6 +178,7 @@
 		13E9A5EE2906F115005B8C42 /* PetDemo */ = {
 			isa = PBXGroup;
 			children = (
+				132720772907F420001AF33A /* Extensions */,
 				13E9A6392906FE39005B8C42 /* Coordinators */,
 				13E9A6322906F601005B8C42 /* Services */,
 				13E9A6252906F32C005B8C42 /* Models */,
@@ -428,6 +439,7 @@
 				13E9A62F2906F55A005B8C42 /* PetListViewModel.swift in Sources */,
 				13E9A5F22906F115005B8C42 /* SceneDelegate.swift in Sources */,
 				13E9A6312906F563005B8C42 /* PetDetailViewModel.swift in Sources */,
+				132720792907F420001AF33A /* Kingfisher+Extensions.swift in Sources */,
 				13E9A64329070B8F005B8C42 /* NSURLSessionPetAPIProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

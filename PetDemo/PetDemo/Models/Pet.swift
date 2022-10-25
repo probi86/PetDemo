@@ -27,7 +27,7 @@ struct Pet: Codable {
     var gender: String
     var status: String
     var distance: Double
-    var photos: PetPhotos?
+    var photos: [PetPhotos]?
     var description: String?
     
     private var breeds: PetBreed

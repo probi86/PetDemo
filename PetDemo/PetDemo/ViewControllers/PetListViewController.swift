@@ -62,6 +62,19 @@ class PetListViewController: UIViewController {
                 self?.tableView.reloadData()
             })
             .store(in: &cancellables)
+        
+        viewModel?.$morePagesAvailable
+            .sink(receiveValue: { [weak self] available in
+                if available {
+                    let activityIndicatorView = UIActivityIndicatorView()
+                    activityIndicatorView.frame.size.height = 50.0
+                    activityIndicatorView.startAnimating()
+                    self?.tableView.tableFooterView = activityIndicatorView
+                } else {
+                    self?.tableView.tableFooterView = nil
+                }
+            })
+            .store(in: &cancellables)
 
         viewModel?.$isReloading
             .sink(receiveValue: { [weak self] reloading in
@@ -69,23 +82,41 @@ class PetListViewController: UIViewController {
                 guard let petCount = self?.viewModel?.pets.count else {
                     return
                 }
-
-                if !reloading {
-                    self?.refreshControl.endRefreshing()
-                }
-
-                let hideTableView = reloading && petCount == 0
-                self?.tableView.isHidden = hideTableView
-                if hideTableView {
-                    self?.activityIndicatorView.startAnimating()
+                
+                let isTableViewEmpty = petCount == 0
+                
+                if reloading {
+                    self?.errorLabel.isHidden = true
+                    self?.retryButton.isHidden = true
+                    
+                    if isTableViewEmpty && self?.refreshControl.isRefreshing == false {
+                        self?.activityIndicatorView.startAnimating()
+                        self?.loadingPetsLabel.isHidden = false
+                    }
+                    
                 } else {
+                    self?.refreshControl.endRefreshing()
                     self?.activityIndicatorView.stopAnimating()
+                    self?.loadingPetsLabel.isHidden = true
+                    
+                    if let error = self?.viewModel?.loadingError, isTableViewEmpty {
+                        self?.errorLabel.isHidden = false
+                        self?.errorLabel.text = error.localizedDescription
+                        self?.retryButton.isHidden = false
+                    }
                 }
-                self?.loadingPetsLabel.isHidden = !hideTableView
             })
             .store(in: &cancellables)
     }
 
+}
+
+extension PetListViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentSize.height > scrollView.frame.size.height && scrollView.contentOffset.y > scrollView.contentSize.height - scrollView.frame.size.height {
+            viewModel?.loadNextPage()
+        }
+    }
 }
 
 extension PetListViewController: UITableViewDataSource, UITableViewDelegate {

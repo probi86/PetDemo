@@ -14,18 +14,20 @@ class PetTableViewCell: UITableViewCell {
     
     @IBOutlet weak var petImageView: UIImageView!
     @IBOutlet weak var petNameLabel: UILabel!
+    @IBOutlet weak var petBreedLabel: UILabel!
     @IBOutlet weak var petSubtitleLabel: UILabel!
     
     var pet: Pet? {
         didSet {
             petNameLabel.text = pet?.name
-            petSubtitleLabel.text = pet?.description
+            petSubtitleLabel.text = pet?.description?.folding(options: .diacriticInsensitive, locale: .current)
+            petImageView.image = UIImage(systemName: "photo.circle")
             petImageView.kf.cancelDownloadTask()
+            petBreedLabel.text = pet?.breed
             
-            if let smallPhoto = pet?.photos?.small, let url = URL(string: smallPhoto) {
-                petImageView.kf.setImage(with: url)
+            if let smallPhoto = pet?.photos?.first?.large, let url = URL(string: smallPhoto) {
+                petImageView.kf.setImage(with: url, options: .optionsForFadeIn())
             }
-            
         }
     }
     
@@ -33,13 +35,7 @@ class PetTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        petImageView.layer.cornerRadius = petImageView.frame.size.height / 2.0
     }
     
 }

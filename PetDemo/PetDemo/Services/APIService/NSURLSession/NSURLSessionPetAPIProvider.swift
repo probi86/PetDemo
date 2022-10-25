@@ -37,14 +37,18 @@ class NSURLSessionPetAPIProvider: PetAPIServiceProviding {
     
     //MARK: - APIServiceProviding
     
-    func reloadPets(latitude: Double?, longitude: Double?, page: Int?) -> AnyPublisher<PetResponse, Error> {
+    func loatPets(latitude: Double?, longitude: Double?, page: Int?) -> AnyPublisher<PetResponse, Error> {
         
         var urlComponents = urlComponents(path: "/v2/animals")
+        var queryItems = [URLQueryItem]()
         if let lat = latitude, let lng = longitude {
-            urlComponents.queryItems = [
-                URLQueryItem(name: "location", value: "\(lat), \(lng)")
-            ]
+            queryItems.append(URLQueryItem(name: "location", value: "\(lat), \(lng)"))
         }
+        if let p = page {
+            queryItems.append(URLQueryItem(name: "page", value: "\(p)"))
+        }
+        
+        urlComponents.queryItems = queryItems
         
         guard let url = urlComponents.url else {
             return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
