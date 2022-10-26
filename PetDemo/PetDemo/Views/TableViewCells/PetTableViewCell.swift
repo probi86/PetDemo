@@ -21,8 +21,8 @@ class PetTableViewCell: UITableViewCell {
     
     var pet: Pet? {
         didSet {
-            petNameLabel.text = pet?.name
-            petSubtitleLabel.text = pet?.description?.folding(options: .diacriticInsensitive, locale: .current)
+            petNameLabel.text = pet?.name.htmlDecode(depth: 2)
+            petSubtitleLabel.text = pet?.description?.htmlDecode(depth: 2)
             petImageView.image = UIImage(systemName: "photo.circle")
             petImageView.kf.cancelDownloadTask()
             petBreedLabel.text = pet?.breed

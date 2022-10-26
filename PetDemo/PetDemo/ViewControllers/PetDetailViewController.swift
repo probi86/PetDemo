@@ -26,7 +26,7 @@ class PetDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = viewModel?.pet.name
+        navigationItem.title = viewModel?.pet.name.htmlDecode(depth: 2)
         
         if let fullPhoto = viewModel?.pet.photos?.first?.full, let url = URL(string: fullPhoto) {
             petImageView.layer.cornerRadius = 10.0
@@ -40,7 +40,7 @@ class PetDetailViewController: UIViewController {
             petImageViewAspectRatioConstraint.isActive = false
         }
         
-        petDescriptionLabel.text = viewModel?.pet.description
+        petDescriptionLabel.text = viewModel?.pet.description?.htmlDecode().htmlDecode(depth: 2)
         
         petDetailsTableView.dataSource = self
         petDetailsTableView.delegate = self
