@@ -17,14 +17,13 @@ class CoreLocationProvider: NSObject, LocationProviding, CLLocationManagerDelega
     
     private var locationManager = CLLocationManager()
     private var locationSubject = PassthroughSubject<(latitude: Double, longitude: Double), Error>()
-    private var authorizationSubject = PassthroughSubject<Bool, Error>()
+    private var authorizationSubject = CurrentValueSubject<Bool, Error>(false)
     
     private var cancellables = [AnyCancellable]()
     
     override init() {
         super.init()
         locationManager.delegate = self
-        //TODO: Update authroziation subject as well to be an optional
     }
     
     //MARK: - LocationProviding
@@ -32,15 +31,13 @@ class CoreLocationProvider: NSObject, LocationProviding, CLLocationManagerDelega
     func getLocation() -> AnyPublisher<(latitude: Double, longitude: Double), Error> {
         askForPermissionIfNeeded()
             .sink { [weak self] completion in
-                switch completion {
-                case .failure(let error):
+                if case let .failure(error) = completion {
                     self?.locationSubject.send(completion: .failure(error))
-                default:
-                    break
                 }
             } receiveValue: { [weak self] authorized in
-                self?.locationManager.requestLocation()
-                
+                if authorized {
+                    self?.locationManager.requestLocation()
+                }
             }
             .store(in: &cancellables)
         
@@ -94,6 +91,5 @@ class CoreLocationProvider: NSObject, LocationProviding, CLLocationManagerDelega
                 .eraseToAnyPublisher()
         }
     }
-    
     
 }

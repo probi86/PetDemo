@@ -134,7 +134,7 @@ extension PetListViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let pet = viewModel?.pets[indexPath.row] {
-            viewModel?.selected(pet: pet)
+            viewModel?.showDetailsFor(pet: pet)
         }
     }
     

@@ -45,19 +45,31 @@ struct Pet: Codable {
             ("Size", size),
             ("Gender", gender),
             ("Status", status),
-            ("Distance", "\(distance) mi")
+            ("Distance", distance == 0 ? "N/A" : "\(distance) mi")
         ]
     }
 }
 
 struct PetPagination: Codable {
-    var count_per_page: Int
-    var total_count: Int
-    var current_page: Int
-    var total_pages: Int
+    var countPerPage: Int
+    var totalCount: Int
+    var currentPage: Int
+    var totalPages: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case countPerPage = "count_per_page"
+        case totalCount = "total_count"
+        case currentPage = "current_page"
+        case totalPages = "total_pages"
+    }
 }
 
 struct PetResponse: Codable {
-    var animals: [Pet]
+    var pets: [Pet]
     var pagination: PetPagination
+    
+    enum CodingKeys: String, CodingKey {
+        case pets = "animals"
+        case pagination
+    }
 }

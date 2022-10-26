@@ -16,24 +16,24 @@ class PetListViewModel {
     private var dataPersistingProvider: PetDataPersistingProviding
     private var locationProvider: LocationProviding
     
-    @Published private(set) var pets = [Pet]()
-    @Published private(set) var isReloading = false
-    @Published private(set) var isLoadingNextPage = false
-    @Published private(set) var loadingError: Error?
-    @Published private(set) var morePagesAvailable = false
-     
+    private var fetchPersistedPetsCancellable: AnyCancellable?
+    private var cancellables = [AnyCancellable]()
+    
+    private var isLoadingNextPage = false
     private var lastLatitude: Double = 0
     private var lastLongitude: Double = 0
     private var paginationInfo: PetPagination? {
         didSet {
             if let info = paginationInfo {
-                morePagesAvailable = info.current_page < info.total_pages
+                morePagesAvailable = info.currentPage < info.totalPages
             }
         }
     }
     
-    var cancellables = [AnyCancellable]()
-    private var fetchPersistedPetsCancellable: AnyCancellable?
+    @Published private(set) var pets = [Pet]()
+    @Published private(set) var isReloading = false
+    @Published private(set) var loadingError: Error?
+    @Published private(set) var morePagesAvailable = false
     
     //MARK: - Lifecycle
     
@@ -72,9 +72,6 @@ class PetListViewModel {
         loadingError = nil
         
         if withLocation {
-            lastLatitude = 0
-            lastLongitude = 0
-            
             locationProvider.getLocation()
                 .first()
                 .sink { [weak self] completion in
@@ -101,7 +98,7 @@ class PetListViewModel {
                     
                 }, receiveValue: { [weak self] petResponse in
                     print("Loaded pets")
-                    self?.pets = petResponse.animals
+                    self?.pets = petResponse.pets
                     if let pets = self?.pets {
                         self?.dataPersistingProvider.store(pets: pets)
                     }
@@ -121,16 +118,16 @@ class PetListViewModel {
             return
         }
         
-        if pagination.current_page < pagination.total_pages {
+        if pagination.currentPage < pagination.totalPages {
             isLoadingNextPage = true
             
-            apiServiceProvider.loatPets(latitude: lastLatitude, longitude: lastLongitude, page: pagination.current_page + 1)
+            apiServiceProvider.loatPets(latitude: lastLatitude, longitude: lastLongitude, page: pagination.currentPage + 1)
                 .delay(for: 2.0, scheduler: OperationQueue.main) //Just to be able to see the spinner
                 .sink { [weak self] _ in
                     self?.isLoadingNextPage = false
                 } receiveValue: { [weak self] petResponse in
                     print("Loaded next page")
-                    self?.pets.append(contentsOf: petResponse.animals)
+                    self?.pets.append(contentsOf: petResponse.pets)
                     if let pets = self?.pets {
                         self?.dataPersistingProvider.store(pets: pets)
                     }
@@ -140,7 +137,7 @@ class PetListViewModel {
         }
     }
     
-    func selected(pet: Pet) {
-        coordinator.showDetailFor(pet: pet)
+    func showDetailsFor(pet: Pet) {
+        coordinator.showDetailFors(pet: pet)
     }
 }

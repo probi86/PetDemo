@@ -37,7 +37,7 @@ class NSURLSessionPetAPIProvider: PetAPIServiceProviding {
     
     //MARK: - APIServiceProviding
     
-    func loatPets(latitude: Double, longitude: Double, page: Int? = nil) -> AnyPublisher<PetResponse, Error> {
+    func loatPets(latitude: Double = 0, longitude: Double = 0, page: Int? = nil) -> AnyPublisher<PetResponse, Error> {
         
         var urlComponents = urlComponents(path: "/v2/animals")
         var queryItems = [URLQueryItem]()
@@ -51,9 +51,8 @@ class NSURLSessionPetAPIProvider: PetAPIServiceProviding {
         guard let url = urlComponents.url else {
             return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
         }
-        let urlRequest = URLRequest(url: url)
         
-        return makeAuthenticatedRequest(urlRequest, session: urlSession)
+        return makeAuthenticatedRequest(URLRequest(url: url), session: urlSession)
             .decode(type: PetResponse.self, decoder: JSONDecoder())
             .receive(on: OperationQueue.main)
             .eraseToAnyPublisher()
@@ -72,7 +71,10 @@ class NSURLSessionPetAPIProvider: PetAPIServiceProviding {
                 return session.dataTaskPublisher(for: r)
                     .tryMap({ (data: Data, response: URLResponse) in
                         if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode != 200 {
-                            throw URLError(.userAuthenticationRequired)
+                            if httpResponse.statusCode == 401 {
+                                throw URLError(.userAuthenticationRequired)
+                            }
+                            throw URLError(.badServerResponse)
                         } else {
                             return data
                         }
@@ -96,7 +98,7 @@ class NSURLSessionPetAPIProvider: PetAPIServiceProviding {
     private func getBearerToken() -> AnyPublisher<Token, Error> {
         //Return the current token if not expired
         if let t = token {
-            if let tokenValidFor = t.expirationDate?.timeIntervalSinceNow, tokenValidFor > 3598 { //TODO: Change this!
+            if let tokenValidFor = t.expirationDate?.timeIntervalSinceNow, tokenValidFor > 10 { //3598 {
                 return Just(t)
                     .setFailureType(to: Error.self)
                     .eraseToAnyPublisher()
@@ -110,7 +112,7 @@ class NSURLSessionPetAPIProvider: PetAPIServiceProviding {
             return existingFetchPublisher
         }
         
-        //Otherwise clear the token and fetch a new token
+        //Otherwise fetch a new token
         guard let url = urlComponents(path: "/v2/oauth2/token").url else {
             return Fail(error: URLError(.badURL))
                 .eraseToAnyPublisher()

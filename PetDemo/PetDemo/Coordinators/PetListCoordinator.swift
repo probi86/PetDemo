@@ -42,7 +42,7 @@ class PetListCoordinator: Coordinator {
     
     //MARK: - Public
     
-    func showDetailFor(pet: Pet) {
+    func showDetailFors(pet: Pet) {
         let petDetailViewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PetDetailViewController") as! PetDetailViewController
         
         let viewModel = PetDetailViewModel(
@@ -56,7 +56,5 @@ class PetListCoordinator: Coordinator {
         
         self.navigationController.pushViewController(petDetailViewController, animated: true)
     }
-    
-    
     
 }

@@ -45,8 +45,6 @@ class PetDetailViewController: UIViewController {
         petDetailsTableView.dataSource = self
         petDetailsTableView.delegate = self
         petDetailsTableView.register(UINib(nibName: "PetDetailTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "PetDetailTableViewCell")
-
-        // Do any additional setup after loading the view.
     }
     
 }
