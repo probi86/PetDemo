@@ -11,7 +11,10 @@ extension String {
     func htmlDecode(depth: Int = 1) -> String {
         
         //Replaced the attributed string method with this simpler form, because it cases error logs. TODO: Investigate
-        return self.replacingOccurrences(of: "&amp;", with: "&").replacingOccurrences(of: "&#039;", with: "'")
+        return self
+            .replacingOccurrences(of: "&amp;", with: "&")
+            .replacingOccurrences(of: "&#39;", with: "'")
+            .replacingOccurrences(of: "&#039;", with: "'")
         
         
 //        guard let data = data(using: .utf8) else {
