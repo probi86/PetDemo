@@ -11,17 +11,21 @@ import Combine
 
 final class NSURLSessionPetAPIProviderTests: XCTestCase {
     
-    var goodCredentialsAPIProvider = URLSessionPetAPIServiceProvider(apiKey: "gZFOnrtkq6CL1mOB4xSwx2EacNHbnpESQjUR9xThTAcyVtNuLT", apiSecret: "jSRULM85xGveYMj1WKZQmPLaI8t4eZgzgFL6iMrf")
-    var badCredentialsAPIProvider = URLSessionPetAPIServiceProvider(apiKey: "", apiSecret: "")
+    var goodCredentialsAPIProvider: URLSessionPetAPIServiceProvider!
+    var badCredentialsAPIProvider: URLSessionPetAPIServiceProvider!
     
     var cancellables = [AnyCancellable]()
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        goodCredentialsAPIProvider = URLSessionPetAPIServiceProvider(apiKey: "gZFOnrtkq6CL1mOB4xSwx2EacNHbnpESQjUR9xThTAcyVtNuLT", apiSecret: "jSRULM85xGveYMj1WKZQmPLaI8t4eZgzgFL6iMrf")
+        badCredentialsAPIProvider = URLSessionPetAPIServiceProvider(apiKey: "", apiSecret: "")
     }
 
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+        goodCredentialsAPIProvider = nil
+        badCredentialsAPIProvider = nil
     }
     
     func testBadCredentialsLoad() throws {
