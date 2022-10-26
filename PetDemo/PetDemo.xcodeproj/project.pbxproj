@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		130AAF232908FB000092E80B /* UserDefaultsPetDataPersistingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130AAF222908FB000092E80B /* UserDefaultsPetDataPersistingTests.swift */; };
+		130AAF252908FBA00092E80B /* PetTestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130AAF242908FBA00092E80B /* PetTestUtils.swift */; };
+		130AAF27290906980092E80B /* NSURLSessionPetAPIProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130AAF26290906980092E80B /* NSURLSessionPetAPIProviderTests.swift */; };
 		132720792907F420001AF33A /* Kingfisher+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132720782907F420001AF33A /* Kingfisher+Extensions.swift */; };
 		134832532908EA50005850E6 /* PetDataPersistingProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134832522908EA50005850E6 /* PetDataPersistingProviding.swift */; };
 		134832562908EAB8005850E6 /* UserDefaultsPetDataPersister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134832552908EAB8005850E6 /* UserDefaultsPetDataPersister.swift */; };
@@ -54,6 +57,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		130AAF222908FB000092E80B /* UserDefaultsPetDataPersistingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsPetDataPersistingTests.swift; sourceTree = "<group>"; };
+		130AAF242908FBA00092E80B /* PetTestUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetTestUtils.swift; sourceTree = "<group>"; };
+		130AAF26290906980092E80B /* NSURLSessionPetAPIProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSURLSessionPetAPIProviderTests.swift; sourceTree = "<group>"; };
 		132720782907F420001AF33A /* Kingfisher+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Kingfisher+Extensions.swift"; sourceTree = "<group>"; };
 		134832522908EA50005850E6 /* PetDataPersistingProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetDataPersistingProviding.swift; sourceTree = "<group>"; };
 		134832552908EAB8005850E6 /* UserDefaultsPetDataPersister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsPetDataPersister.swift; sourceTree = "<group>"; };
@@ -223,7 +229,10 @@
 		13E9A6052906F117005B8C42 /* PetDemoTests */ = {
 			isa = PBXGroup;
 			children = (
+				130AAF242908FBA00092E80B /* PetTestUtils.swift */,
 				13E9A6062906F117005B8C42 /* PetDemoTests.swift */,
+				130AAF222908FB000092E80B /* UserDefaultsPetDataPersistingTests.swift */,
+				130AAF26290906980092E80B /* NSURLSessionPetAPIProviderTests.swift */,
 			);
 			path = PetDemoTests;
 			sourceTree = "<group>";
@@ -480,6 +489,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				130AAF252908FBA00092E80B /* PetTestUtils.swift in Sources */,
+				130AAF27290906980092E80B /* NSURLSessionPetAPIProviderTests.swift in Sources */,
+				130AAF232908FB000092E80B /* UserDefaultsPetDataPersistingTests.swift in Sources */,
 				13E9A6072906F117005B8C42 /* PetDemoTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

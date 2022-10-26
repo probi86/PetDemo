@@ -37,13 +37,11 @@ class NSURLSessionPetAPIProvider: PetAPIServiceProviding {
     
     //MARK: - APIServiceProviding
     
-    func loatPets(latitude: Double?, longitude: Double?, page: Int?) -> AnyPublisher<PetResponse, Error> {
+    func loatPets(latitude: Double, longitude: Double, page: Int? = nil) -> AnyPublisher<PetResponse, Error> {
         
         var urlComponents = urlComponents(path: "/v2/animals")
         var queryItems = [URLQueryItem]()
-        if let lat = latitude, let lng = longitude {
-            queryItems.append(URLQueryItem(name: "location", value: "\(lat), \(lng)"))
-        }
+        queryItems.append(URLQueryItem(name: "location", value: "\(latitude), \(longitude)"))
         if let p = page {
             queryItems.append(URLQueryItem(name: "page", value: "\(p)"))
         }
@@ -74,11 +72,7 @@ class NSURLSessionPetAPIProvider: PetAPIServiceProviding {
                 return session.dataTaskPublisher(for: r)
                     .tryMap({ (data: Data, response: URLResponse) in
                         if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode != 200 {
-                            if httpResponse.statusCode == 401 {
-                                throw URLError(.userAuthenticationRequired)
-                            } else {
-                                throw URLError(.badServerResponse)
-                            }
+                            throw URLError(.userAuthenticationRequired)
                         } else {
                             return data
                         }
@@ -134,7 +128,7 @@ class NSURLSessionPetAPIProvider: PetAPIServiceProviding {
                 if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode != 200 {
                     print("Failed to refresh token")
                     self?.token = nil
-                    throw URLError(.badServerResponse)
+                    throw URLError(.userAuthenticationRequired)
                 }
                 return data
             }

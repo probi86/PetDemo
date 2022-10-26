@@ -12,8 +12,13 @@ class PetDetailViewController: UIViewController {
     
     //MARK: - IVars
     
-    @IBOutlet weak var petDetailsTableView: UITableView!
+    
     @IBOutlet weak var petImageView: UIImageView!
+    @IBOutlet weak var petDescriptionLabel: UILabel!
+    @IBOutlet weak var petDetailsTableView: UITableView!
+    
+    @IBOutlet weak var petImageViewAspectRatioConstraint: NSLayoutConstraint!
+    
     
     var viewModel: PetDetailViewModel?
     
@@ -32,7 +37,10 @@ class PetDetailViewController: UIViewController {
             petImageView.kf.setImage(with: url, options: .optionsForFadeIn())
         } else {
             petImageView.heightAnchor.constraint(equalToConstant: 0).isActive = true
+            petImageViewAspectRatioConstraint.isActive = false
         }
+        
+        petDescriptionLabel.text = viewModel?.pet.description
         
         petDetailsTableView.dataSource = self
         petDetailsTableView.delegate = self

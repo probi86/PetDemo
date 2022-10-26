@@ -14,7 +14,7 @@ class UserDefaultsPetDataPersistingProvider: PetDataPersistingProviding {
     
     var userDefaults: UserDefaults
     
-    init(userDefaults: UserDefaults) {
+    init(userDefaults: UserDefaults = .standard) {
         self.userDefaults = userDefaults
     }
     

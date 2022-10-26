@@ -87,11 +87,20 @@
                                 <rect key="frame" x="20" y="48" width="374" height="224.5"/>
                                 <color key="backgroundColor" systemColor="systemBrownColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" secondItem="pgT-kv-LDI" secondAttribute="width" multiplier="0.6" priority="750" id="hxN-2G-opC"/>
+                                    <constraint firstAttribute="height" secondItem="pgT-kv-LDI" secondAttribute="width" multiplier="0.6" id="hxN-2G-opC"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="dYd-8V-TcA">
+                                <rect key="frame" x="20" y="280.5" width="374" height="20.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="100" id="vPe-Ex-y6W"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="9Rd-AV-DBj">
-                                <rect key="frame" x="0.0" y="272.5" width="414" height="623.5"/>
+                                <rect key="frame" x="0.0" y="309" width="414" height="587"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                         </subviews>
@@ -99,17 +108,22 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="9Rd-AV-DBj" secondAttribute="bottom" id="3q0-IL-DYI"/>
+                            <constraint firstItem="dYd-8V-TcA" firstAttribute="top" secondItem="pgT-kv-LDI" secondAttribute="bottom" constant="8" id="NK8-RV-SI3"/>
                             <constraint firstItem="pgT-kv-LDI" firstAttribute="top" secondItem="ZH8-Re-Uwd" secondAttribute="top" id="YdO-nr-0Kw"/>
                             <constraint firstAttribute="trailingMargin" secondItem="pgT-kv-LDI" secondAttribute="trailing" id="cFk-mh-OEz"/>
                             <constraint firstItem="ZH8-Re-Uwd" firstAttribute="trailing" secondItem="9Rd-AV-DBj" secondAttribute="trailing" id="g2f-sM-VZh"/>
-                            <constraint firstItem="9Rd-AV-DBj" firstAttribute="top" secondItem="pgT-kv-LDI" secondAttribute="bottom" id="rFk-yv-wug"/>
+                            <constraint firstItem="dYd-8V-TcA" firstAttribute="trailing" secondItem="pgT-kv-LDI" secondAttribute="trailing" id="hdP-JV-boz"/>
+                            <constraint firstItem="9Rd-AV-DBj" firstAttribute="top" secondItem="dYd-8V-TcA" secondAttribute="bottom" constant="8" id="mYr-IQ-3kc"/>
                             <constraint firstItem="9Rd-AV-DBj" firstAttribute="leading" secondItem="ZH8-Re-Uwd" secondAttribute="leading" id="t0Y-p6-kz6"/>
                             <constraint firstItem="pgT-kv-LDI" firstAttribute="leading" secondItem="P7K-Lh-Vkw" secondAttribute="leadingMargin" id="uu8-zB-zih"/>
+                            <constraint firstItem="dYd-8V-TcA" firstAttribute="leading" secondItem="pgT-kv-LDI" secondAttribute="leading" id="x0E-YN-pBU"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="petDescriptionLabel" destination="dYd-8V-TcA" id="IUQ-he-VOC"/>
                         <outlet property="petDetailsTableView" destination="9Rd-AV-DBj" id="Pe3-r5-sNp"/>
                         <outlet property="petImageView" destination="pgT-kv-LDI" id="lKd-dg-Lld"/>
+                        <outlet property="petImageViewAspectRatioConstraint" destination="hxN-2G-opC" id="FTr-di-mUf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1BZ-Ic-ygL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
