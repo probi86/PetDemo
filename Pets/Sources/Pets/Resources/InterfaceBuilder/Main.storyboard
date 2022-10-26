@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qe9-So-14G">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Pet List View Controller-->
+        <scene sceneID="9kK-K8-pE0">
+            <objects>
+                <viewController storyboardIdentifier="PetListViewController" id="qe9-So-14G" customClass="PetListViewController" customModule="Pets" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gDL-Mt-yg6">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="2xl-yP-2hb">
+                                <rect key="frame" x="0.0" y="48" width="414" height="848"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="bH1-uA-ZBB">
+                                <rect key="frame" x="197" y="445" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading pets..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qd5-P6-faM">
+                                <rect key="frame" x="156.5" y="465" width="101.5" height="18"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dO5-ew-7oR">
+                                <rect key="frame" x="10" y="445.5" width="394" height="19.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                                <color key="textColor" systemColor="systemRedColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IGj-y6-nm9">
+                                <rect key="frame" x="183.5" y="475" width="47" height="34"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="arrow.clockwise" catalog="system"/>
+                                <connections>
+                                    <action selector="retryTapped:" destination="qe9-So-14G" eventType="touchUpInside" id="f2N-An-KmJ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="peK-2z-Fh0"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="dO5-ew-7oR" firstAttribute="centerY" secondItem="peK-2z-Fh0" secondAttribute="centerY" id="1RV-Af-s7z"/>
+                            <constraint firstAttribute="bottom" secondItem="2xl-yP-2hb" secondAttribute="bottom" id="Fk1-M2-gBW"/>
+                            <constraint firstItem="2xl-yP-2hb" firstAttribute="top" secondItem="peK-2z-Fh0" secondAttribute="top" id="GD9-1B-BKR"/>
+                            <constraint firstItem="qd5-P6-faM" firstAttribute="centerX" secondItem="bH1-uA-ZBB" secondAttribute="centerX" id="K5i-4i-ew2"/>
+                            <constraint firstItem="dO5-ew-7oR" firstAttribute="width" secondItem="gDL-Mt-yg6" secondAttribute="width" constant="-20" id="O5L-vL-dSa"/>
+                            <constraint firstItem="bH1-uA-ZBB" firstAttribute="centerX" secondItem="peK-2z-Fh0" secondAttribute="centerX" id="bM4-5z-ZE6"/>
+                            <constraint firstItem="IGj-y6-nm9" firstAttribute="centerX" secondItem="dO5-ew-7oR" secondAttribute="centerX" id="hD2-rG-lHx"/>
+                            <constraint firstItem="IGj-y6-nm9" firstAttribute="top" secondItem="dO5-ew-7oR" secondAttribute="bottom" constant="10" id="lDa-W6-1gU"/>
+                            <constraint firstItem="dO5-ew-7oR" firstAttribute="centerX" secondItem="peK-2z-Fh0" secondAttribute="centerX" id="riT-Wp-0Lt"/>
+                            <constraint firstItem="bH1-uA-ZBB" firstAttribute="centerY" secondItem="peK-2z-Fh0" secondAttribute="centerY" id="uue-5e-CAq"/>
+                            <constraint firstItem="2xl-yP-2hb" firstAttribute="leading" secondItem="gDL-Mt-yg6" secondAttribute="leading" id="wIS-0P-g3F"/>
+                            <constraint firstItem="bH1-uA-ZBB" firstAttribute="bottom" secondItem="qd5-P6-faM" secondAttribute="top" id="wXi-mH-ays"/>
+                            <constraint firstAttribute="trailing" secondItem="2xl-yP-2hb" secondAttribute="trailing" id="zvM-2E-iYy"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="activityIndicatorView" destination="bH1-uA-ZBB" id="Hhs-n6-Oob"/>
+                        <outlet property="errorLabel" destination="dO5-ew-7oR" id="nfn-QO-xYu"/>
+                        <outlet property="loadingPetsLabel" destination="qd5-P6-faM" id="95O-wb-xFC"/>
+                        <outlet property="retryButton" destination="IGj-y6-nm9" id="un8-Jk-7PC"/>
+                        <outlet property="tableView" destination="2xl-yP-2hb" id="JaY-3q-vjT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iT7-Sb-c9D" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="814" y="141"/>
+        </scene>
+        <!--Pet Detail View Controller-->
+        <scene sceneID="l8X-eh-ei5">
+            <objects>
+                <viewController storyboardIdentifier="PetDetailViewController" id="8pW-ss-AEh" customClass="PetDetailViewController" customModule="Pets" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="P7K-Lh-Vkw">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pgT-kv-LDI">
+                                <rect key="frame" x="20" y="48" width="374" height="224.5"/>
+                                <color key="backgroundColor" systemColor="systemBrownColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" secondItem="pgT-kv-LDI" secondAttribute="width" multiplier="0.6" id="hxN-2G-opC"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="dYd-8V-TcA">
+                                <rect key="frame" x="20" y="280.5" width="374" height="20.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="100" id="vPe-Ex-y6W"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="9Rd-AV-DBj">
+                                <rect key="frame" x="0.0" y="309" width="414" height="587"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ZH8-Re-Uwd"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="9Rd-AV-DBj" secondAttribute="bottom" id="3q0-IL-DYI"/>
+                            <constraint firstItem="dYd-8V-TcA" firstAttribute="top" secondItem="pgT-kv-LDI" secondAttribute="bottom" constant="8" id="NK8-RV-SI3"/>
+                            <constraint firstItem="pgT-kv-LDI" firstAttribute="top" secondItem="ZH8-Re-Uwd" secondAttribute="top" id="YdO-nr-0Kw"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="pgT-kv-LDI" secondAttribute="trailing" id="cFk-mh-OEz"/>
+                            <constraint firstItem="ZH8-Re-Uwd" firstAttribute="trailing" secondItem="9Rd-AV-DBj" secondAttribute="trailing" id="g2f-sM-VZh"/>
+                            <constraint firstItem="dYd-8V-TcA" firstAttribute="trailing" secondItem="pgT-kv-LDI" secondAttribute="trailing" id="hdP-JV-boz"/>
+                            <constraint firstItem="9Rd-AV-DBj" firstAttribute="top" secondItem="dYd-8V-TcA" secondAttribute="bottom" constant="8" id="mYr-IQ-3kc"/>
+                            <constraint firstItem="9Rd-AV-DBj" firstAttribute="leading" secondItem="ZH8-Re-Uwd" secondAttribute="leading" id="t0Y-p6-kz6"/>
+                            <constraint firstItem="pgT-kv-LDI" firstAttribute="leading" secondItem="P7K-Lh-Vkw" secondAttribute="leadingMargin" id="uu8-zB-zih"/>
+                            <constraint firstItem="dYd-8V-TcA" firstAttribute="leading" secondItem="pgT-kv-LDI" secondAttribute="leading" id="x0E-YN-pBU"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="petDescriptionLabel" destination="dYd-8V-TcA" id="IUQ-he-VOC"/>
+                        <outlet property="petDetailsTableView" destination="9Rd-AV-DBj" id="Pe3-r5-sNp"/>
+                        <outlet property="petImageView" destination="pgT-kv-LDI" id="lKd-dg-Lld"/>
+                        <outlet property="petImageViewAspectRatioConstraint" destination="hxN-2G-opC" id="FTr-di-mUf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1BZ-Ic-ygL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1577" y="141"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="arrow.clockwise" catalog="system" width="113" height="128"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBrownColor">
+            <color red="0.63529411764705879" green="0.51764705882352946" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
