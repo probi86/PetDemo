@@ -39,6 +39,7 @@ class PetListViewController: UIViewController {
         
         setupBindings()
         
+        viewModel?.fetchSavedPets()
         viewModel?.reloadPets(withLocation: true)
     }
     

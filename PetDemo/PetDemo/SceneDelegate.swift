@@ -32,6 +32,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 apiKey: "gZFOnrtkq6CL1mOB4xSwx2EacNHbnpESQjUR9xThTAcyVtNuLT",
                 apiSecret: "jSRULM85xGveYMj1WKZQmPLaI8t4eZgzgFL6iMrf"
             ),
+            dataPersistingProvider: UserDefaultsPetDataPersistingProvider(
+                userDefaults: UserDefaults.standard
+            ),
             navigationController: navigationController
         )
         

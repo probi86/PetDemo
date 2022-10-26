@@ -10,14 +10,17 @@ class PetListCoordinator: Coordinator {
     
     private var locationProvider: LocationProviding
     private var apiServiceProvider: PetAPIServiceProviding
+    private var dataPersistingProvider: PetDataPersistingProviding
     
     init(
         locationProvider: LocationProviding,
         apiServiceProvider: PetAPIServiceProviding,
+        dataPersistingProvider: PetDataPersistingProviding,
         navigationController: UINavigationController
     ) {
         self.locationProvider = locationProvider
         self.apiServiceProvider = apiServiceProvider
+        self.dataPersistingProvider = dataPersistingProvider
         self.navigationController = navigationController
     }
     
@@ -29,6 +32,7 @@ class PetListCoordinator: Coordinator {
         let viewModel = PetListViewModel(
             coordinator: self,
             apiServiceProvider: apiServiceProvider,
+            dataPersistingProvider: dataPersistingProvider,
             locationProvider: locationProvider
         )
         petListViewController.viewModel = viewModel
@@ -44,6 +48,7 @@ class PetListCoordinator: Coordinator {
         let viewModel = PetDetailViewModel(
             apiServiceProvider: apiServiceProvider,
             locationProvider: locationProvider,
+            dataPersistingProvider: dataPersistingProvider,
             pet: pet
         )
         

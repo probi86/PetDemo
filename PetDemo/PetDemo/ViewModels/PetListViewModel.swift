@@ -13,6 +13,7 @@ class PetListViewModel {
     //MARK: - IVars
     private var coordinator: PetListCoordinator
     private var apiServiceProvider: PetAPIServiceProviding
+    private var dataPersistingProvider: PetDataPersistingProviding
     private var locationProvider: LocationProviding
     
     @Published private(set) var pets = [Pet]()
@@ -32,16 +33,19 @@ class PetListViewModel {
     }
     
     var cancellables = [AnyCancellable]()
+    private var fetchPersistedPetsCancellable: AnyCancellable?
     
     //MARK: - Lifecycle
     
     init(
         coordinator: PetListCoordinator,
         apiServiceProvider: PetAPIServiceProviding,
+        dataPersistingProvider: PetDataPersistingProviding,
         locationProvider: LocationProviding
     ) {
         self.coordinator = coordinator
         self.apiServiceProvider = apiServiceProvider
+        self.dataPersistingProvider = dataPersistingProvider
         self.locationProvider = locationProvider
         
         isReloading = false
@@ -50,7 +54,20 @@ class PetListViewModel {
     
     //MARK: - Public
     
+    func fetchSavedPets() {
+        fetchPersistedPetsCancellable = dataPersistingProvider.fetchPets()
+            .sink(receiveCompletion: { [weak self] _ in
+                self?.fetchPersistedPetsCancellable = nil
+            }, receiveValue: { [weak self] pets in
+                self?.pets = pets
+            })
+        fetchPersistedPetsCancellable?.store(in: &cancellables)
+    }
+    
     func reloadPets(withLocation: Bool = false) {
+        
+        fetchPersistedPetsCancellable?.cancel()
+        
         isReloading = true
         loadingError = nil
         
@@ -85,6 +102,9 @@ class PetListViewModel {
                 }, receiveValue: { [weak self] petResponse in
                     print("Loaded pets")
                     self?.pets = petResponse.animals
+                    if let pets = self?.pets {
+                        self?.dataPersistingProvider.store(pets: pets)
+                    }
                     self?.paginationInfo = petResponse.pagination
                 })
                 .store(in: &cancellables)
@@ -111,6 +131,9 @@ class PetListViewModel {
                 } receiveValue: { [weak self] petResponse in
                     print("Loaded next page")
                     self?.pets.append(contentsOf: petResponse.animals)
+                    if let pets = self?.pets {
+                        self?.dataPersistingProvider.store(pets: pets)
+                    }
                     self?.paginationInfo = petResponse.pagination
                 }
                 .store(in: &cancellables)

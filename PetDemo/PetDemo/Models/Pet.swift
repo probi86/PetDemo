@@ -22,7 +22,9 @@ struct PetPhotos: Codable {
 }
 
 struct Pet: Codable {
+    var id: Int
     var name: String
+    var type: String
     var size: String
     var gender: String
     var status: String
@@ -34,6 +36,17 @@ struct Pet: Codable {
     
     var breed: String {
         breeds.primary
+    }
+    
+    var petDetails: [(name: String, value: String)] {
+        return [
+            ("Type", type),
+            ("Breed", breed),
+            ("Size", size),
+            ("Gender", gender),
+            ("Status", status),
+            ("Distance", "\(distance) mi")
+        ]
     }
 }
 
