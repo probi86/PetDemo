@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class NSURLSessionPetAPIProvider: PetAPIServiceProviding {
+class URLSessionPetAPIServiceProvider: PetAPIServiceProviding {
     
     private struct Token: Codable {
         var token_type: String

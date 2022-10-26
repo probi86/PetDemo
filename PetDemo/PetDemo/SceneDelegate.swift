@@ -28,7 +28,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let mainAnimalCoordinator = PetListCoordinator(
             locationProvider: CoreLocationProvider(),
-            apiServiceProvider: NSURLSessionPetAPIProvider(
+            apiServiceProvider: URLSessionPetAPIServiceProvider(
                 apiKey: "gZFOnrtkq6CL1mOB4xSwx2EacNHbnpESQjUR9xThTAcyVtNuLT",
                 apiSecret: "jSRULM85xGveYMj1WKZQmPLaI8t4eZgzgFL6iMrf"
             ),

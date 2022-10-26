@@ -11,8 +11,8 @@ import Combine
 
 final class NSURLSessionPetAPIProviderTests: XCTestCase {
     
-    var goodCredentialsAPIProvider = NSURLSessionPetAPIProvider(apiKey: "gZFOnrtkq6CL1mOB4xSwx2EacNHbnpESQjUR9xThTAcyVtNuLT", apiSecret: "jSRULM85xGveYMj1WKZQmPLaI8t4eZgzgFL6iMrf")
-    var badCredentialsAPIProvider = NSURLSessionPetAPIProvider(apiKey: "", apiSecret: "")
+    var goodCredentialsAPIProvider = URLSessionPetAPIServiceProvider(apiKey: "gZFOnrtkq6CL1mOB4xSwx2EacNHbnpESQjUR9xThTAcyVtNuLT", apiSecret: "jSRULM85xGveYMj1WKZQmPLaI8t4eZgzgFL6iMrf")
+    var badCredentialsAPIProvider = URLSessionPetAPIServiceProvider(apiKey: "", apiSecret: "")
     
     var cancellables = [AnyCancellable]()
 
