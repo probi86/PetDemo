@@ -47,7 +47,7 @@ public class PetListCoordinator: Coordinator {
     //MARK: - Public
     
     public func showDetailFors(pet: Pet) {
-        let petDetailViewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PetDetailViewController") as! PetDetailViewController
+        let petDetailViewController = UIStoryboard(name: "Main", bundle: Bundle.module).instantiateViewController(withIdentifier: "PetDetailViewController") as! PetDetailViewController
         
         let viewModel = PetDetailViewModel(
             apiServiceProvider: apiServiceProvider,

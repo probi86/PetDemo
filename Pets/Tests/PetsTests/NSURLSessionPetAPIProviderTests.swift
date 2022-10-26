@@ -7,7 +7,7 @@
 
 import XCTest
 import Combine
-@testable import PetDemo
+@testable import Pets
 
 final class NSURLSessionPetAPIProviderTests: XCTestCase {
     
