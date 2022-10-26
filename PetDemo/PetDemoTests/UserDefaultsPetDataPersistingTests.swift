@@ -19,7 +19,7 @@ final class UserDefaultsPetDataPersistingTests: XCTestCase {
         if let data = TestJsons.jsonStringFromDocs.data(using: .utf8) {
             do {
                 let response = try JSONDecoder().decode(PetResponse.self, from: data)
-                petsToStore = response.animals
+                petsToStore = response.pets
             } catch {
                 throw error
             }
